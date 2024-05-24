@@ -10,6 +10,7 @@
         placeholder="Search"
         @focus="isOpen = true"
         @keydown.escape.window="isOpen = false"
+        @keydown="isOpen = true"
         @keydown.shift.tab="isOpen = false"
     >
     <div wire:loading class="absolute top-0 right-0 mr-4 mt-2" role="status">
@@ -22,7 +23,7 @@
     @if(strlen($search) > 0)
     <div 
         class="z-50 absolute text-sm bg-gray-800 rounded w-64 mt-4" 
-        x-show="isOpen"
+        x-show.transition.opacity="isOpen"
     >
         @if ($searchResults -> count() > 0) 
         <ul>
@@ -32,7 +33,7 @@
                         @if($result['poster_path']) 
                             <img class="w-8" src="https://image.tmdb.org/t/p/w92/{{ $result['poster_path'] }}" alt="poster">
                         @else
-                            <img src="https://via.placeholder.com/50x75" alt="poster">
+                            <img class="w-8" src="https://via.placeholder.com/50x75" alt="poster">
                         @endif
                         <span class="ml-4">{{ $result['title'] }}</span>
                     </a>
