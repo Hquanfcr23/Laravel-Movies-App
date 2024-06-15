@@ -28,12 +28,39 @@
                     <a class="hover:text-gray-300" href="#">Actors</a>
                 </li @class(['p-4', 'font-bold' => true])>
             </ul>
-            <div class="flex flex-col items-center md:flex-row ">
+            <div class="flex flex-col items-center md:flex-row">
                 <livewire:search-dropdown/>
-                <div class="md:ml-4 mt-3 md:mt-0">
-                    <a href="#">
-                        <img src="/img/avatar.jpg" alt="avatar" class="rounded-full w-8 h-8">
-                    </a>
+                <a class="ml-5" href="#">
+                    <img src="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png" alt="avatar" class="rounded-full w-8 h-8">
+                </a>
+                <div class="dropdownNavbarLink mt-3 md:mt-0 flex flex-col items-center justify-between">
+                    <button class="ml-2 text-zinc-100 z-2 flex items-center">
+                        @if(auth()->check())
+                            {{ auth()->user()->name }}
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+                         @endif
+                        <svg class="mt-1 w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    <span class="bg-red-600 w-44 h-4 absolute opacity-0"></span>
+                    <div class="dropdownNavbar my-2 font-normal bg-white divide-y divide-gray-100 truncate rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <ul class="text-sm text-gray-700 dark:text-gray-400">
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                          </li>
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                          </li>
+                          <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                          </li>
+                        </ul>
+                        <div class="py-1">
+                          <a href="{{route('logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +68,12 @@
     @yield('content')
     @livewireScripts
 </body>
+
 </html>
+
+
+
+
+
 
 

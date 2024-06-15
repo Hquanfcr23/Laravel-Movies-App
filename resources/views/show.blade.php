@@ -39,13 +39,21 @@
                 </div>
                 <div x-data="{ isOpen: false }">
                     @if(count($movie['videos']['results']) > 0)
-                    <div class="mt-12">
+                    <div class="mt-12 inline-flex gap-8">
                         <button 
                             @click="isOpen=true"
-                            class="flex inline-flex items-center bg-orange-400 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-500 transition ease-in-out duration-150">
+                            class="inline-flex items-center bg-orange-400 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-orange-500 transition ease-in-out duration-150">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
                             <span class="ml-2">Play Trailer</span>
                         </button>
+                        <a href="{{route('movies.watch', $movie['id'])}}">
+                            <button 
+                            class="inline-flex items-center bg-green-500 text-gray-900 rounded font-semibold px-5 py-4 hover:bg-green-400 transition ease-in-out duration-150">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+                            <span class="ml-2">Watch Free</span>
+                            </button>
+                        </a>
+                        
                     </div>
                     @endif
                     <!-- module play trailer-->

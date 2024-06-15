@@ -64,6 +64,16 @@ class MoviesController extends Controller
         ]);
     }
 
+    public function watch(string $id)
+    {
+        $movie = Http::get('https://api.themoviedb.org/3/movie/'.$id.'?api_key=6660f19edb8b4f7f256364ffadb0d7bb&append_to_response=credits,videos,images')
+        -> json();
+        // dump($movie);
+        return view('Movie_Watching', [
+            'movie' => $movie,
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
