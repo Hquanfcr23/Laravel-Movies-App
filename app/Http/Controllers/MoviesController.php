@@ -14,6 +14,33 @@ class MoviesController extends Controller
     {
         $popularMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=6660f19edb8b4f7f256364ffadb0d7bb')
         -> json()['results'];
+        dump($popularMovies);
+
+        $nowplayingMovies = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=6660f19edb8b4f7f256364ffadb0d7bb')
+        -> json()['results'];
+
+        $genresArray = Http::get('https://api.themoviedb.org/3/genre/movie/list?api_key=6660f19edb8b4f7f256364ffadb0d7bb')
+        -> json()['genres'];
+
+        $genres = collect($genresArray) ->mapWithKeys(function($genre) {
+            return [$genre['id'] => $genre['name']];
+        });
+
+        // dump($nowplayingMovies);
+
+        return view('index', [
+            'popularMovies' => $popularMovies,
+            'nowplayingMovies' => $nowplayingMovies,
+            'genres' => $genres
+        ]
+        );
+    }
+
+    public function mylist()
+    {
+        $popularMovies = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=6660f19edb8b4f7f256364ffadb0d7bb')
+        -> json()['results'];
+        dump($popularMovies);
 
         $nowplayingMovies = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=6660f19edb8b4f7f256364ffadb0d7bb')
         -> json()['results'];
@@ -51,13 +78,17 @@ class MoviesController extends Controller
         //
     }
 
+
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
+        
         $movie = Http::get('https://api.themoviedb.org/3/movie/'.$id.'?api_key=6660f19edb8b4f7f256364ffadb0d7bb&append_to_response=credits,videos,images')
         -> json();
+        dump($movie);
         // dump($movie);
         return view('show', [
             'movie' => $movie,

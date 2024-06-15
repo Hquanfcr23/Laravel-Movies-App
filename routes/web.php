@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 
 Route::get('/',[MoviesController::class, 'index'])->name('movies.index');
+Route::get('/mylist',[MoviesController::class, 'mylist'])->name('movies.mylist');
 Route::get('/movies/{movies}',[MoviesController::class, 'show'])->name('movies.show');
 Route::get('/movies/watch/{movies}',[MoviesController::class, 'watch'])->name('movies.watch');
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
