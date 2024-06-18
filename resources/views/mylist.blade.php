@@ -5,10 +5,10 @@
     <div class="popular-movies">
         <h2 class="uppercase tracking-wider text-orange-400 text-lg font-semibold">MY LIST</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            @if($isDel == 1 || $isDel == -1)
-            @else
+            {{-- My list movie card --}}
+            @foreach ($movies  as $movie)
             <div class="mt-8">
-                <a href="{{route('movies.shows', $movie['id'])}}">
+                <a href="{{route('movies.show', $movie['id'])}}">
                     <img src="{{'https://image.tmdb.org/t/p/w500/'.$movie['poster_path']}}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150">
                 </a>
                 <div class="mt-2">
@@ -21,13 +21,12 @@
                     </div>
                     <div class="text-sm text-gray-300">
                         @foreach ($movie['genres'] as $genre)
-                            {{-- {{$genres->get($genre)}}@if (!$loop->last), @endif --}}
+                            {{$genres->get($genre['id'])}}@if (!$loop->last), @endif
                         @endforeach
                     </div>
                 </div>
             </div>
-            @endif
-            
+            @endforeach
         </div>
     </div>
  </div>

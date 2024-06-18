@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
 
+use Livewire\Component;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -10,25 +11,27 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Post;
-use App\Livewire\Comments;
 
-class CommentController extends Controller
+use function Laravel\Prompts\textarea;
+
+class Comments extends Component
 {
+    public $comment;
+    public function render()
+    {
+        $posts = Post::all();
+        return view('livewire.comments', compact('posts'));
+    }
 
-    public function post(Request $request, string $id) {
+    public function post() {
         $user = Auth::user(); 
-
         $post = new Post;
-
         $post->user_name = $user->name;
-        $post->description = $request->comment;
+        $post->description = $this->comment;
         $post->time = Carbon::now('Asia/Ho_Chi_Minh')->toFormattedDateString();
         $post->user_id = $user->id;
-        $post->movie_id = $id;
+        $post->movie_id = session('movie_id');
         $post->save();
-
-        
-        return redirect(route('movies.show', $id));
+        $this->comment = ' ';
     }
-    
 }
