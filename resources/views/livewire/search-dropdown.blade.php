@@ -6,11 +6,10 @@
     <input 
         wire:model.live.debounce.300ms="search" 
         type="text" 
-        class="text-sm bg-gray-800 rounded-full w-64 px-4 py-1 pl-8 focus:outline-none focus:shadow-ouline" 
+        class="z-0 text-sm bg-gray-800 rounded-full w-64 px-4 py-1 pl-8 focus:outline-none focus:shadow-ouline" 
         placeholder="Search"
         @focus="isOpen = true"
         @keydown.escape.window="isOpen = false"
-        @keydown="isOpen = true"
         @keydown.shift.tab="isOpen = false"
     >
     <div wire:loading class="absolute top-0 right-0 mr-4 mt-2" role="status">

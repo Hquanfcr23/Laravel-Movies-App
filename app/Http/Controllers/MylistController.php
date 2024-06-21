@@ -31,12 +31,12 @@ class MylistController extends Controller
             return [$genre['id'] => $genre['name']];
         });
 
-        $isDel = -1;
+        $mylists = Mylist::all();
 
 
         return view('mylist', [
             'genres' => $genres,
-            'isDel' => $isDel,
+            'mylists' => $mylists,
             'movies' => $movies,
         ]
         );
@@ -44,16 +44,23 @@ class MylistController extends Controller
 
     public function add(Request $request)
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
+        $mylists = Mylist::all(); 
         $mylist = new Mylist;
         $mylist->user_id = $user->id;
-        $mylist->movie_id = $request->item_id;;
+        $mylist->movie_id = $request->movie_id;
         $mylist->save();
-        dump($request->item_id);
+    }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Đã thêm mục vào danh sách của bạn.'
-        ]);
+    public function delete(Request $request)
+    {
+        $isExist = 0;
+        $user = Auth::user();
+        $mylists = Mylist::all(); 
+        dump($request->movie_id);
+        dump($user->id);
+        MyList::where('user_id', $user->id)
+                    ->where('movie_id', $request->movie_id)
+                    ->delete();
     }
 }

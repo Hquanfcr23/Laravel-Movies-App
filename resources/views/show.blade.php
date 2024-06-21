@@ -33,56 +33,108 @@
                             <div class="text-sm text-gray-400">{{$crew['job']}}</div>
                         </div>
                         @endif
-                        
                         @endforeach
-                        {{-- button add remove my list --}}
-                        
+                        {{-- button add delete my list --}}
+                        @php
+                            $exist = 0;
+                        @endphp
+
+                        @foreach($mylists as $mylish) 
+                            @if($mylish->user_id == auth()->user()->id && $mylish->movie_id == $movie['id']) 
+                                @php
+                                    $exist = 1;
+                                @endphp
+                            @endif
+                        @endforeach
+                        @if($exist == 0) 
                         <button 
-                        id="addToMyListBtn" data-movie-id="{{ $movie['id'] }}"
-                        @click="like=true"
-                        x-show="!like"
-                        class="ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
-                        Add to my list
+                                id="addToMyListBtn" data-movie-id="{{ $movie['id'] }}"
+                                @click="like=true"
+                                x-show="!like"
+                                class="ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
+                                Add to my list
                         </button>
                         <button 
-                        id="removeToMyListBtn" data-movie-id="{{ $movie['id'] }}"
-                        @click="like=false"
-                        x-show="like"
-                        class=" ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
-                        Remove to my list
+                                id="deleteToMyListBtn" data-movie-id="{{ $movie['id'] }}"
+                                @click="like=false"
+                                x-show="like"
+                                class=" ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
+                                Remove to my list
                         </button>
+                        @else
+                        <button 
+                                id="deleteToMyListBtn" data-movie-id="{{ $movie['id'] }}"
+                                @click="like=true"
+                                x-show="!like"
+                                class=" ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
+                                Remove to my list
+                        </button>
+                        <button 
+                                id="addToMyListBtn" data-movie-id="{{ $movie['id'] }}"
+                                @click="like=false"
+                                x-show="like"
+                                class="ml-6 text-sm bg-red-600 rounded-xl px-4 py-2 hover:bg-red-500 transition">
+                                Add to my list
+                        </button>
+                        @endif
+
                         {{-- script ajax add remove mylist --}}
 
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
                             $(document).ready(function() {
+                                // Add to my list
                                 $('#addToMyListBtn').click(function() {
-                                    var itemId = $(this).data('movie-id');
+                                    var movieId = $(this).data('movie-id');
                                     
                                     $.ajax({
                                         url: '{{ route("mylist.add") }}',
-                                        method: 'post',
+                                        method: 'POST',
                                         data: {
-                                            item_id: itemId,
+                                            movie_id: movieId,
                                             _token: '{{ csrf_token() }}'
                                         },
                                         success: function(response) {
-                                            // Xử lý phản hồi thành công (nếu cần)
                                             console.log(response.message);
                                             alert('Đã thêm mục vào danh sách của bạn.');
-                        
-                                            // Ví dụ: Cập nhật giao diện ở đây nếu cần
+                                            // Thay đổi trạng thái button
+                                            $('#addToMyListBtn').hide();
+                                            $('#deleteToMyListBtn').show();
                                         },
                                         error: function(xhr, status, error) {
-                                            // Xử lý lỗi (nếu có)
                                             console.error(error);
                                             alert('Đã xảy ra lỗi khi thêm mục vào danh sách.');
                                         }
                                     });
                                 });
+
+                                // Delete from my list
+                                $('#deleteToMyListBtn').click(function() {
+                                    var movieId = $(this).data('movie-id');
+                                    
+                                    $.ajax({
+                                        url: '{{ route("mylist.delete") }}',
+                                        method: 'get',
+                                        data: {
+                                            movie_id: movieId,
+                                            _token: '{{ csrf_token() }}'
+                                        },
+                                        success: function(response) {
+                                            console.log(response.message);
+                                            alert('Mục đã được xóa khỏi danh sách của bạn.');
+                                            // Thay đổi trạng thái button
+                                            $('#deleteToMyListBtn').hide();
+                                            $('#addToMyListBtn').show();
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error(error);
+                                            alert('Đã xảy ra lỗi khi xóa mục khỏi danh sách.');
+                                        }
+                                    });
+                                });
                             });
                         </script>
-                        {{-- end button add remove my list --}}
+                        {{-- end button add delete my list --}}
                     </div>
                 </div>
                 <div x-data="{ isOpen: false }">

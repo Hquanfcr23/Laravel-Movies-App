@@ -6,7 +6,7 @@
         <div class="container mx-auto px-4 pb-24 flex flex-col md:flex-row w-full">
             <div class="movie-play mx-auto px-6 w-full">
                 {{-- <iframe src="https://2embed.org/embed/movie/653346" height="200" width="300" title="Iframe Example"></iframe> --}}
-                <iframe allowfullscreen src="{{'https://2embed.org/embed/movie/'.$movie['id']}}" height="500px" width="100%" scrolling="no"></iframe>
+                <iframe allowfullscreen src="{{'https://vidsrc.to/embed/movie/'.$movie['id']}}" height="500px" width="100%" scrolling="no"></iframe>
             </div>
         </div>
         <span class="mx-auto w-11/12 rounded-md border-b-16 border-gray-700"> </span>

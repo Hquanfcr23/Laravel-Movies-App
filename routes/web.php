@@ -13,8 +13,6 @@ Route::get('/mylist', [MylistController::class, 'index'])->name('movies.mylist')
 
 Route::get('/movies/{movies}',[MoviesController::class, 'show'])->name('movies.show');
 
-Route::get('/movie/{movies}',[MoviesController::class, 'shows'])->name('movies.shows');
-
 Route::get('/movies/watch/{movies}',[MoviesController::class, 'watch'])->name('movies.watch');
 
 Route::get('/login', [AuthManager::class, 'login'])->name('login');
@@ -31,6 +29,8 @@ Route::get('/profile/{profile_id}', [ProfileController::class, 'show'])->name('p
 
 Route::post('/profile/{profile_id}', [ProfileController::class, 'update'])->name('profile.update');
 
-Route::post('/mylist', [MylistController::class, 'add'])->name('mylist.add');
+Route::post('/mylist/add', [MylistController::class, 'add'])->name('mylist.add');
+
+Route::get('/mylist/delete', [MylistController::class, 'delete'])->name('mylist.delete');
 
 
