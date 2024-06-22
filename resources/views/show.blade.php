@@ -217,14 +217,14 @@
             x-transition.duration.500ms
             >
             <div class="container mx-auto w-auto lg:px-32 2xl:px-60 mt-8 rounded-lg overflow-y-auto">
-                <div class="bg-gray-900 rounded h-screen">
+                <div class="bg-gray-900 rounded my-auto">
                     <div class="flex justify-end pr-4 pt-1">
                         <button
                              @click="isOpen=false"
                             class="text-3xl leading-none hover:text-gray-300">&times;
                         </button>
                         </div>
-                        <div class="modal-body px-8 py-8 mt-10">
+                        <div class="modal-body px-8 py-8">
                             <img :src="image" alt="actor">
                         </div>
                     </div>

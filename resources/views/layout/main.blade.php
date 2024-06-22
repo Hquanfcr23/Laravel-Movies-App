@@ -20,12 +20,12 @@
                     </a>
                 </li>
                 {{-- Menu bar --}}
-                <div class="z-10" x-data="{ isOpenMenu: true }">
-                    <button class="ml-8 md:ml-6 mt-3 md:mt-0 flex items-center cursor-pointer"
+                <div class="z-10" x-data="{ isOpenMenu: false }">
+                    <button class="ml-8 md:ml-6 mt-3 md:mt-0 flex items-center cursor-pointer hover:opacity-80 transition"
                             @click="isOpenMenu=true"
                             >
                             <svg class="pb-1" width="17" height="17" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#fff" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
-                            <span class="hover:text-gray-300 pb-1 ml-1">Menu</span>
+                            <span class="pb-1 ml-1">Menu</span>
                     </button>
                     {{-- module menu --}}
                     <div
@@ -52,26 +52,26 @@
                                     <div class="px-8 pb-8 mb-16">
                                         <div class="p-4 pt-0 responsive-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  justify-between gap-4 overflow-hidden relative" style="margin-bottom: 180px">
                                             <div class="flex flex-col">
-                                                <h1 class="py-4 px-2 text-orange-600 font-bold text-xl">Movie</h1>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Popular Movies</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Now Playing</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Top Rated</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Upcoming</h2>
+                                                <h2 class="py-4 px-2 text-orange-600 font-bold text-xl">Movie</h2>
+                                                <a href="{{route('filter', 'popular')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Popular Movies</a>
+                                                <a href="{{route('filter', 'now_playing')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Now Playing</a>
+                                                <a href="{{route('filter', 'top_rated')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Top Rated</a>
+                                                <a href="{{route('filter', 'upcoming')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Upcoming</a>
                                             </div>
                                             <div class="flex flex-col col-span-2">
                                                 <h1 class="py-4 px-2 text-orange-600 font-bold text-xl">Genre</h1>
                                                 <div class="grid grid-cols-3 gap-2">
                                                     @foreach ($genresArrays as $genresArray)
-                                                    <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">{{$genresArray['name']}}</h2>
+                                                    <a href="{{route('filter', $genresArray['id'])}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">{{$genresArray['name']}}</a>
                                                     @endforeach
                                                 </div>
                                             </div>
                                             <div class="flex flex-col ml-8">
                                                 <h1 class="py-4 px-2 text-orange-600 font-bold text-xl">WatchList</h1>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Popular Movies</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Now Playing</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Top Rated</h2>
-                                                <h2 class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Upcoming</h2>
+                                                <a href="{{route('filter', 'PopularMovies')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Popular Movies</a>
+                                                <a href="{{route('filter', 'PopularMovies')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Now Playing</a>
+                                                <a href="{{route('filter', 'PopularMovies')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Top Rated</a>
+                                                <a href="{{route('filter', 'PopularMovies')}}" class="px-2 mt-2 cursor-pointer rounded-sm hover:text-orange-500 font-medium transition">Upcoming</a>
                                             </div>
                                         </div>
                                     </div>

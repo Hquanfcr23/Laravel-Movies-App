@@ -16,19 +16,7 @@ class CommentController extends Controller
 {
 
     public function post(Request $request, string $id) {
-        $user = Auth::user(); 
-
-        $post = new Post;
-
-        $post->user_name = $user->name;
-        $post->description = $request->comment;
-        $post->time = Carbon::now('Asia/Ho_Chi_Minh')->toFormattedDateString();
-        $post->user_id = $user->id;
-        $post->movie_id = $id;
-        $post->save();
-
-        
-        return redirect(route('movies.show', $id));
+       
     }
     
 }
